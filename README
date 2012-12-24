@@ -1,0 +1,13 @@
+This is a mirror of http://www.vim.org/scripts/script.php?script_id=4368
+
+Currently only supports Windows Steam, Linux support is coming relatively soon.
+
+tl;dr - :Steam audio<Tab><CR>
+        Launches Audiosurf (if you have it installed)
+
+This is a plugin to launch steam games without having to leave vim. To use
+it, you must have Steam installed (obvioulsy), and your Vim installation must
+support Ruby. To check whether your Vim supports ruby, execute
+    :ruby puts "It works!"
+
+(this should cause the message "It works!" to be displayed in the status bar).

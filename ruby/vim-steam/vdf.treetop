@@ -1,0 +1,51 @@
+grammar VimSteamVdf
+    rule file
+        name:qstring __ content:hvalue __
+        {
+            def value
+                { name.value => content.value }
+            end
+        }
+    end
+
+    rule member
+        key:qstring __ val:hvalue
+        {
+            def value
+                [key.value, val.value]
+            end
+        }
+    end
+
+    rule hash
+        '{' __ members:( member __ )* '}'
+        {
+            def value
+                Hash[members.elements.map { |member| member.elements[0].value }]
+            end
+        }
+    end
+
+    rule qstring
+        '"' chars:char* '"'
+        {
+            def value
+                chars.elements.map(&:text_value).join
+            end
+        }
+    end
+
+    rule hvalue
+        hash / qstring
+    end
+
+    rule char
+        '\"' / !'"' .
+    end
+
+    rule __
+        [ \r\n\t]*
+    end
+end
+
+#  vim: set et tw=100 ts=4 sw=4:
